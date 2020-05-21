@@ -1,6 +1,6 @@
 function setupIntervals() {
 	console.log("Creating Looping Checkers (EXTENSION)")
-	setInterval(updateTableTicketView, 5000);
+	setTimeout(updateTableTicketView, 5000);
 	setInterval(checkForUpdatedTickets, 5000);
 }
 
@@ -10,7 +10,6 @@ var tableRowsOfTickets = document.getElementsByClassName("ticket-row");
 for (const tableRow of tableRowsOfTickets) {
 	var statusOfTicketElement = tableRow.getElementsByClassName('state')[0];
 	var statusOfTicketClasses = statusOfTicketElement.getElementsByTagName("span")[0].classList;
-	//console.log(statusOfTicketClasses);
 	
 	if (statusOfTicketClasses.contains("new")){
 	tableRow.setAttribute('style', 'background-color:#b4e5d9 !important;');
@@ -33,18 +32,22 @@ function checkForUpdatedTickets() {
 		var indexRefreshAlertStyles = refreshAlert.style;
 	
 		if (indexRefreshAlertStyles.display == "none"){
-			console.log("The page does not need refreshing")
 		}
 		else {
-			console.log("Refresh the page");
+			cLog("Refresh the page");
 			refreshAlert.click();
+			setTimeout(updateTableTicketView, 5000);
 		}
 	}
 	catch(error) {
-		console.error(error);
+		cLog(error);
 	}
 }
 
+
+function cLog(whatToLog){
+	console.log("%cFreshService Usability Upgrader Extension: " +whatToLog, "color:#f00; background: yellow; font-size:18px;");
+}
 
 
 setupIntervals();
