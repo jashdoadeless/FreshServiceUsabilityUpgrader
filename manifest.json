@@ -1,6 +1,6 @@
 {
   "name": "FreshService Usability Upgrader",
-  "version": "0.0.1",
+  "version": "0.1",
   "description": "This extension provides extra functionality to the freshservice support pages.",
   "manifest_version": 2,
   "icons": {
