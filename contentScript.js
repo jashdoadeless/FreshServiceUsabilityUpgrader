@@ -1,5 +1,5 @@
 var run = false;
-
+var acceptableurlends = ["tickets", "requested_by_me", "deleted", "spam", "monitored_by", "all_tickets", "service_requests", "incidents", "unresolved", "new_and_my_open"]
 var tableorcard = "";
 var previousview = "neither";
 var counter = 0;
@@ -13,7 +13,8 @@ function setupIntervals() {
 }
 
 function checkIfRunable() {
-	if (window.location.href.substr(window.location.href.lastIndexOf("/")+1) == "tickets"){
+	var urlend = window.location.href.substr(window.location.href.lastIndexOf("/")+1)
+	if (acceptableurlends.includes(urlend)){
 		run = true;
 	}
 	else {
@@ -98,7 +99,7 @@ function checkForUpdatedTickets() {
 			else {
 				cLog("Refresh the page as the style was " + indexRefreshAlertStyles.display);
 				refreshAlert.click();
-				setTimeout(updateTableTicketView, 5000);
+				
 			}
 		}
 		catch(error) {
@@ -109,6 +110,7 @@ function checkForUpdatedTickets() {
 			setTimeout(updateTableTicketView, 5000);
 			counter = 0;
 		}
+		setTimeout(updateTableTicketView, 5000);
 	}
 }
 
