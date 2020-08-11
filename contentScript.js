@@ -16,12 +16,34 @@ function checkIfRunable() {
 	var urlend = window.location.href.substr(window.location.href.lastIndexOf("/")+1)
 	if (acceptableurlends.includes(urlend)){
 		run = true;
+		generateCSS()
+		
 	}
 	else {
 		run = false;
 	}
 }
+function generateCSS() {
+	var fsucss = document.getElementById("freshserviceusabilityupgradercssstyles");
+    if(!fsucss){
+	var createdStyleTag = document.createElement("style");
+		createdStyleTag.textContent = `.overdueBackgroundColour {
+background: linear-gradient(180deg, #ffd0d6, #ff6a7d);
+background-size: 400% 400%;
 
+-webkit-animation: overdueAnimation 4s ease infinite;
+-moz-animation: overdueAnimation 4s ease infinite;
+animation: overdueAnimation 4s ease infinite;
+}
+		@keyframes overdueAnimation {
+									0%{background-position:50% 0%}
+									50%{background-position:50% 100%}
+									100%{background-position:50% 0%}
+									}`;
+createdStyleTag.setAttribute("id", "freshserviceusabilityupgradercssstyles")
+		document.body.appendChild(createdStyleTag);
+}
+}
 function tableOrCard() {
 	if (run == true){
 		tableorcard = document.querySelector("#ticket_switch_icons > span.tooltip.selected").dataset.view;
@@ -49,6 +71,9 @@ function updateTableTicketView() {
 				}
 				if (statusOfTicketClasses.contains("elapsed")){
 					tableRow.setAttribute('style', 'background-color:#ffd0d6 !important;');
+				}
+				if (statusOfTicketClasses.contains("overdue")){
+					tableRow.classList.add("overdueBackgroundColour");
 				}
 				
 			}
